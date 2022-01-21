@@ -1,7 +1,24 @@
-=begin
-Write your code for the 'Word Count' exercise in this file. Make the tests in
-`word_count_test.rb` pass.
+class Phrase
+  def initialize(phrase)
+    @phrase = phrase
+    @phrase.gsub!(/\s+/, ' ')
+    @phrase.gsub!(/,/, ' ')
+    @phrase.gsub!(/[:!&@$%^&".]/, '')
+    @phrase.gsub!(" '", ' ')
+    @phrase.gsub!("' ", ' ')
+    @phrase.downcase!
+    @words = @phrase.split
+  end
 
-To get started with TDD, see the `README.md` file in your
-`ruby/word-count` directory.
-=end
+  def word_count
+    @counts = {}
+    for @word in @words do
+      if @counts.key?(@word)
+        @counts[@word] += 1
+      else
+        @counts[@word] = 1
+      end
+    end
+    @counts
+  end
+end
